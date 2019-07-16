@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import GithubKeyForm from '../../containers/githubKeyForm';
 
 function AuthPage() {
   return (
-    <div>AuthPage</div>
+    <Fragment>
+      <GithubKeyForm />
+    </Fragment>
   );
 }
 
