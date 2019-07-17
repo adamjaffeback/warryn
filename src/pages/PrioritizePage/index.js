@@ -3,7 +3,7 @@ import RepoSelector from '../../containers/repoSelector';
 
 function PrioritizePage() {
   return (
-    <div>PrioritizePage
+    <div>
       <RepoSelector />
     </div>
   );

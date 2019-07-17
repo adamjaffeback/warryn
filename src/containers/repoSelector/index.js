@@ -27,7 +27,6 @@ function RepoSelector(props) {
   if (token) {
     return loading ? (<div>Loading...</div>) : (
       <div>
-        <div>Got repos</div>
         {repos.map(repo => {
           return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
         })}
