@@ -45,7 +45,7 @@ export function getReposForUser (token) {
     dispatch(isLoading(true));
 
     try {
-      return makeRequest(token, 'https://api.github.com/user/repos', dispatch);
+      return await makeRequest(token, 'https://api.github.com/user/repos', dispatch);
     } catch (e) {
       const message = 'Could not fetch repos for user';
       console.error(message, e);
