@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import GithubKeyForm from '../../containers/githubKeyForm';
+import GithubKeyForm from '../../containers/GithubKeyForm';
 
 function AuthPage() {
   return (
