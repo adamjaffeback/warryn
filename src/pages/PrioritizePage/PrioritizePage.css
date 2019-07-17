@@ -1,0 +1,10 @@
+.PrioritizePage {
+  display: flex;
+  justify-content: space-around;
+}
+
+.PrioritizePage-column {
+  flex: 50%;
+  padding: 1rem;
+  align-items: center;
+}
