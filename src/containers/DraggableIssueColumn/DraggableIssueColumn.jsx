@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getIssuesForRepo } from '../../state/thunks/repoThunks';
+import { moveIssue } from '../../state/actions/issuesActions';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import IssueCard from '../../components/IssueCard/IssueCard';
 
@@ -31,8 +32,12 @@ function DraggableIssueColumn(props) {
     }
   }, [dispatch, token, repoName])
 
-  function handleDragEnd() {
-    console.log('dropped');
+  function handleDragEnd(result) {
+    const {source, destination} = result;
+
+    if (destination && (source.index !== destination.index)) {
+      dispatch(moveIssue(result));
+    }
   }
 
   return loading ? (<div>Loading...</div>) : (
