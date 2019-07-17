@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getIssuesForRepo } from '../../state/thunks/repoThunks';
-import IssueCard from '../../components/IssueCard';
-
+import { DragDropContext } from 'react-beautiful-dnd';
+import IssueList from '../../components/IssueList/IssueList';
 
 const mapState = state => {
   const {user, repos, ui, issues} = state;
@@ -22,7 +22,7 @@ const mapState = state => {
 };
 
 
-function IssueList(props) {
+function DraggableIssueColumn(props) {
   const {token, repoName, loading, issues, dispatch} = props;
 
   useEffect(() => {
@@ -31,13 +31,15 @@ function IssueList(props) {
     }
   }, [dispatch, token, repoName])
 
+  function handleDragEnd() {
+    console.log('dropped');
+  }
+
   return loading ? (<div>Loading...</div>) : (
-    <div>
-      {issues.map(issue => {
-        return (<IssueCard key={issue.id} issue={issue} />);
-      })}
-    </div>
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <IssueList issues={issues} />
+    </DragDropContext>
   );
 }
 
-export default connect(mapState, null)(IssueList);
+export default connect(mapState, null)(DraggableIssueColumn);

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './PrioritizePage.css';
 import RepoSelector from '../../containers/RepoSelector';
-import IssueList from '../../containers/IssueList';
+import DraggableIssueColumn from '../../containers/DraggableIssueColumn/DraggableIssueColumn';
 
 const mapState = state => ({
   repoSelected: state.repos.reduce((acc, repo) => {
@@ -16,9 +16,9 @@ const mapState = state => ({
 
 function PrioritizePage({repoSelected}) {
   return (
-    <div class='PrioritizePage'>
-      <RepoSelector class='PrioritizePage-column' />
-      {repoSelected ? <IssueList class='PrioritizePage-column' /> : ''}
+    <div className='PrioritizePage'>
+      <RepoSelector className='PrioritizePage-column' />
+      {repoSelected ? <DraggableIssueColumn class='PrioritizePage-column' /> : ''}
     </div>
   );
 }
