@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getReposForUser } from '../../state/thunks/repoThunks';
+import { selectRepo } from '../../state/actions/reposActions';
+import RepoCard from '../../components/RepoCard';
 
 
 const mapState = state => {
@@ -14,7 +16,10 @@ const mapState = state => {
   };
 };
 
-function RepoSelector({token, repos, loading, dispatch, history}) {
+
+function RepoSelector(props) {
+  const {token, repos, loading, dispatch, history} = props;
+
   useEffect(() => {
     dispatch(getReposForUser(token));
   }, [dispatch, token])
@@ -23,15 +28,14 @@ function RepoSelector({token, repos, loading, dispatch, history}) {
     return loading ? (<div>Loading...</div>) : (
       <div>
         <div>Got repos</div>
-        <ul>
-          {repos.map(repo => {
-            return (<li>{repo.name}</li>);
-          })}
-        </ul>
+        {repos.map(repo => {
+          return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
+        })}
       </div>
     );
   } else {
     history.push('/auth');
+    return <span></span>
   }
 }
 
