@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './PrioritizePage.css';
-import RepoSelector from '../../containers/RepoSelector';
+import RepoSelector from '../../containers/RepoSelector/RepoSelector';
 import DraggableIssueColumn from '../../containers/DraggableIssueColumn/DraggableIssueColumn';
 
 const mapState = state => ({

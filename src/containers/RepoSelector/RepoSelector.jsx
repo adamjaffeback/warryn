@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getReposForUser } from '../../state/thunks/repoThunks';
 import { selectRepo } from '../../state/actions/reposActions';
-import RepoCard from '../../components/RepoCard';
+import RepoCard from '../../components/RepoCard/RepoCard';
 
 
 const mapState = state => {

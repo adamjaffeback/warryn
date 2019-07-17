@@ -3,8 +3,8 @@ import './App.css';
 import { Provider } from 'react-redux';
 import store from '../../state/store';
 import { HashRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import AuthPage from '../AuthPage';
-import PrioritizePage from '../PrioritizePage';
+import AuthPage from '../AuthPage/AuthPage';
+import PrioritizePage from '../PrioritizePage/PrioritizePage';
 
 function App() {
   return (
