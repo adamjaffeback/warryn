@@ -21,7 +21,9 @@ function RepoSelector(props) {
   const {token, repos, loading, dispatch, history} = props;
 
   useEffect(() => {
-    dispatch(getReposForUser(token));
+    if (token) {
+      dispatch(getReposForUser(token));
+    }
   }, [dispatch, token])
 
   if (token) {
