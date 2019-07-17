@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { isLoading, logError, clearError } from '../actions/uiActions';
 import { addRepos } from '../actions/reposActions';
+import { addIssues } from '../actions/issuesActions';
 
 function getNextReposUrl (nextHeader) {
   const parts = nextHeader.split(',');
@@ -19,7 +20,7 @@ function getNextReposUrl (nextHeader) {
   return false;
 }
 
-async function makeRequest (token, url, dispatch) {
+async function makeRequest (token, url, onData) {
   const config = {
     headers: {
       Authorization: `token ${token}`,
@@ -27,17 +28,25 @@ async function makeRequest (token, url, dispatch) {
     },
   };
   const response = await axios.get(url, config);
-  dispatch(addRepos(response.data));
+  onData(response.data);
 
   if (typeof response.headers.link === 'string') {
     const nextUrl = getNextReposUrl(response.headers.link);
 
     if (nextUrl) {
-      return makeRequest(token, nextUrl, dispatch);
+      return makeRequest(token, nextUrl, onData);
     }
   }
 
   return;
+}
+
+function handleError (message, error, dispatch) {
+  console.error(message, error);
+  dispatch(logError(message));
+  setTimeout(() => {
+    dispatch(clearError());
+  }, 5000);
 }
 
 export function getReposForUser (token) {
@@ -45,14 +54,33 @@ export function getReposForUser (token) {
     dispatch(isLoading(true));
 
     try {
-      return await makeRequest(token, 'https://api.github.com/user/repos', dispatch);
+      return await makeRequest(
+        token,
+        'https://api.github.com/user/repos',
+        data => dispatch(addRepos(data)),
+      );
     } catch (e) {
       const message = 'Could not fetch repos for user';
-      console.error(message, e);
-      dispatch(logError(message));
-      setTimeout(() => {
-        dispatch(clearError());
-      }, 5000);
+      handleError(message, e, dispatch);
+    } finally {
+      dispatch(isLoading(false));
+    }
+  }
+}
+
+export function getIssuesForRepo (token, fullRepoName) {
+  return async dispatch => {
+    dispatch(isLoading(true));
+
+    try {
+      return await makeRequest(
+        token,
+        `https://api.github.com/repos/${fullRepoName}/issues?state=open`,
+        data => dispatch(addIssues(data)),
+      );
+    } catch (e) {
+      const message = `Could not fetch issues for ${fullRepoName}`;
+      handleError(message, e, dispatch);
     } finally {
       dispatch(isLoading(false));
     }
