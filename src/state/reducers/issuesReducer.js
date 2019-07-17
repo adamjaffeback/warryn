@@ -11,6 +11,8 @@ export default (state = [], action) => {
       const movedIssue = newIssues.splice(source.index, 1)[0];
       newIssues.splice(destination.index, 0, movedIssue);
       return newIssues;
+    case 'CLEAR_ISSUES':
+      return [];
   default:
    return state;
   }

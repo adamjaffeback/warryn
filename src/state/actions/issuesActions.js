@@ -7,3 +7,7 @@ export const moveIssue = dragDropResult => ({
   type: 'MOVE_ISSUE',
   payload: dragDropResult,
 });
+
+export const clearIssues = () => ({
+  type: 'CLEAR_ISSUES',
+});

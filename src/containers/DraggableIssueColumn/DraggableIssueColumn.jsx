@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getIssuesForRepo } from '../../state/thunks/repoThunks';
-import { moveIssue } from '../../state/actions/issuesActions';
+import { clearIssues, moveIssue } from '../../state/actions/issuesActions';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import IssueCard from '../../components/IssueCard/IssueCard';
 
@@ -22,12 +22,13 @@ const mapState = state => {
   };
 };
 
-
 function DraggableIssueColumn(props) {
   const {token, repoName, loading, issues, dispatch} = props;
 
   useEffect(() => {
     if (token) {
+      // clear the current list from the last repo
+      dispatch(clearIssues());
       dispatch(getIssuesForRepo(token, repoName));
     }
   }, [dispatch, token, repoName])

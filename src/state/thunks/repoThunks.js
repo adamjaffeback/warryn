@@ -75,7 +75,7 @@ export function getIssuesForRepo (token, fullRepoName) {
     try {
       return await makeRequest(
         token,
-        `https://api.github.com/repos/${fullRepoName}/issues?state=open`,
+        `https://api.github.com/repos/${fullRepoName}/issues?filter=all`,
         data => dispatch(addIssues(data)),
       );
     } catch (e) {
