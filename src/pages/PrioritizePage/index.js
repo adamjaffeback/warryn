@@ -1,12 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import RepoSelector from '../../containers/RepoSelector';
+import IssueList from '../../containers/IssueList';
 
-function PrioritizePage() {
+const mapState = state => ({
+  repoSelected: state.repos.reduce((acc, repo) => {
+    if (repo.selected) {
+      return true;
+    }
+
+    return acc;
+  }, false),
+});
+
+function PrioritizePage({repoSelected}) {
   return (
     <div>
       <RepoSelector />
+      {repoSelected ? <IssueList /> : ''}
     </div>
   );
 }
 
-export default PrioritizePage;
+export default connect(mapState, null)(PrioritizePage);
