@@ -17,7 +17,7 @@ const mapState = state => ({
 function PrioritizePage({repoSelected}) {
   return (
     <div className='PrioritizePage'>
-      <RepoSelector className='PrioritizePage-column' />
+      <RepoSelector />
       {repoSelected ? <DraggableIssueColumn class='PrioritizePage-column' /> : ''}
     </div>
   );

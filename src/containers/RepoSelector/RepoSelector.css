@@ -1,0 +1,9 @@
+.RepoSelector-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.RepoSelector-prompt {
+  font-size: x-large;
+}
