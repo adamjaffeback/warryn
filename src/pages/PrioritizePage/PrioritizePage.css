@@ -5,4 +5,5 @@
   grid-template-areas:
     "left center right";
   min-height: 100vh;
+  background-image: url(https://s3-us-west-2.amazonaws.com/routable/images/_global/background/hero_background.svg),linear-gradient(213.03deg,#2c84ff,#975bff);
 }
