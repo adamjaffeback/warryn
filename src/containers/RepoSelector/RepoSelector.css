@@ -1,4 +1,5 @@
 .RepoSelector-column {
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,4 +7,5 @@
 
 .RepoSelector-prompt {
   font-size: x-large;
+  color: #f2f2f2;
 }

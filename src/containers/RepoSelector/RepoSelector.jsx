@@ -41,7 +41,7 @@ function RepoSelector(props) {
   if (token) {
     return loading ? (<div style={gridLocation}>Loading...</div>) : (
       <div style={gridLocation} className='RepoSelector-column'>
-        <div className="RepoSelector-prompt">Select a repo to view its issues:</div>
+        <div className="RepoSelector-prompt">Click a repo to view its issues:</div>
         {repos.map(repo => {
           return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
         })}
