@@ -1,6 +1,7 @@
 import React from 'react';
 import './IssueCard.css';
 import { Draggable } from 'react-beautiful-dnd';
+import moment from 'moment';
 
 function Avatar({srcUrl}) {
   return (
@@ -12,6 +13,8 @@ function Avatar({srcUrl}) {
 
 function CardContents ({issue, provided}) {
   const {assignee} = issue;
+  const created = moment(issue.created_at).format('MM/DD/YYYY');
+  const updatedAgo = moment(issue.updated_at).from(moment());
 
   return (
     <div
@@ -25,8 +28,8 @@ function CardContents ({issue, provided}) {
         <div className='IssueCard-title'>{issue.title}</div>
       </div>
       <div className='IssueCard-timestampRow'>
-        <div>Created {issue.created_at}</div>
-        <div>Updated {issue.updated_at} ago</div>
+        <div>Created {created}</div>
+        <div>Updated {updatedAgo}</div>
       </div>
     </div>
   );
