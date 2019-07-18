@@ -1,0 +1,38 @@
+.GHForm {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+label[for=apiKey] {
+  font-size: x-large;
+  font-family: Arial Rounded MT Bold;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+input[name=apiKey] {
+  min-width: 30vw;
+  margin-top: 1em;
+  font-size: large;
+}
+
+#submitApiKey {
+  border: none;
+  border-radius: 8px;
+  background-color: #1b2c48;
+  color: white;
+  height: 56px;
+  width: 50%;
+  font-weight: 500;
+  font-size: large;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#submitApiKey:disabled {
+  opacity: 0.3;
+}

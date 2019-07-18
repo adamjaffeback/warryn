@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setToken } from '../../state/actions/userActions';
 import { withRouter } from 'react-router-dom';
+import './GithubKeyForm.css';
+import { setToken } from '../../state/actions/userActions';
 
-function GithubKeyForm({setToken, history}) {
+function GithubKeyForm({setToken, history, place}) {
   const [key, updateKey] = useState('');
 
   function handleSubmit (ev) {
@@ -18,12 +19,12 @@ function GithubKeyForm({setToken, history}) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        GitHub API Key:
-        <input type='text' value={key} name='apiKey' onChange={handleChange} />
-      </label>
-      <input type='submit' value='Submit' />
+    <form onSubmit={handleSubmit} style={place} className='GHForm'>
+      <label htmlFor='apiKey'>
+        Enter GitHub API Key:
+        <input autoFocus={true} type='text' value={key} name='apiKey' onChange={handleChange} />
+      </label>  
+      <input type='submit' value='Submit' id='submitApiKey' disabled={key === ''} />
     </form>
   );
 }
