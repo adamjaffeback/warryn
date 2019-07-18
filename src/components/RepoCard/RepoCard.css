@@ -8,7 +8,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   cursor: pointer;
 }
 
@@ -19,4 +19,12 @@
 
 .RepoCard.selected {
   background-color: #0cbeab;
+}
+
+.RepoCard-title {
+  font-size: large;
+}
+
+.RepoCard-issue-count {
+  font-size: small;
 }

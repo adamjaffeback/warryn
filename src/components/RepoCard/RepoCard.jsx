@@ -14,8 +14,8 @@ function RepoCard({repo, clickCard}) {
 
   return (
     <div className={classes} onClick={handleClick}>
-      <div>{repo.name}</div>
-      <div>Open Issues: {repo.open_issues}</div>
+      <div className='RepoCard-title'>{repo.name}</div>
+      <div className='RepoCard-issue-count'>{repo.open_issues} open issues</div>
     </div>
   );
 }
