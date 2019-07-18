@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import './GithubKeyForm.css';
 import { setToken } from '../../state/actions/userActions';
 
-function GithubKeyForm({setToken, history, place}) {
+function GithubKeyForm({setToken, history}) {
   const [key, updateKey] = useState('');
 
   function handleSubmit (ev) {
@@ -19,7 +19,7 @@ function GithubKeyForm({setToken, history, place}) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={place} className='GHForm'>
+    <form onSubmit={handleSubmit} className='GHForm'>
       <label htmlFor='apiKey'>
         Enter GitHub API Key:
         <input autoFocus={true} type='text' value={key} name='apiKey' onChange={handleChange} />
