@@ -10,7 +10,7 @@ const mapState = state => {
   const {user, repos, ui} = state;
 
   return {
-    token: user.token,
+    token: user,
     repos: repos,
     loading: ui.isLoading,
   };

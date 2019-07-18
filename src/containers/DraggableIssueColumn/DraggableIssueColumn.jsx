@@ -9,7 +9,7 @@ const mapState = state => {
   const {user, repos, ui, issues} = state;
 
   return {
-    token: user.token,
+    token: user,
     repoName: repos.reduce((acc, repo) => {
       if (repo.selected) {
         return repo.full_name;
