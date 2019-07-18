@@ -10,6 +10,12 @@ export default (state = [], action) => {
       const newIssues = [...state];
       const movedIssue = newIssues.splice(source.index, 1)[0];
       newIssues.splice(destination.index, 0, movedIssue);
+
+      // get the name of the repo to use as the sessionStorage key
+      const repoUrlParts = movedIssue.repository_url.split('/');
+      const repoName = repoUrlParts[repoUrlParts.length - 1];
+      sessionStorage.setItem(repoName, JSON.stringify(newIssues));
+
       return newIssues;
     case 'CLEAR_ISSUES':
       return [];
