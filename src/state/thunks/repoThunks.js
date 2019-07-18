@@ -68,16 +68,57 @@ export function getReposForUser (token) {
   }
 }
 
+function orderIssuesFromSession (repoName, issues) {
+  let sessionIssues = JSON.parse(sessionStorage.getItem(repoName));
+
+  // We've previously applied a custom order
+  if (sessionIssues) {
+    const order = sessionIssues.reduce((acc, issue, index) => {
+      acc[issue.id] = index;
+      return acc;
+    }, {})
+    // sort them on the old order
+    return issues.sort((a, b) => {
+      const aOrder = order[a.id];
+      const bOrder = order[b.id];
+
+      // if a is a new issue
+      if (aOrder === undefined) {
+        // move it up
+        return 1;
+      // if b is a new issue
+      } else if (bOrder === undefined) {
+        // move B up
+        return -1;
+      } else {
+        // determine old order
+        return aOrder - bOrder;
+      }
+    });
+  // sessionIssues is null if nothing is found in sessionStorage
+  } else {
+    // just return the issues as GitHub formatted them
+    return issues;
+  }
+}
+
 export function getIssuesForRepo (token, fullRepoName) {
   return async dispatch => {
     dispatch(isLoading(true));
 
     try {
-      return await makeRequest(
+      const issues = [];
+      // gather all the issues together
+      const addToIssues = data => data.forEach(issue => issues.push(issue));
+      // makeRequest resolves when pagination recursion ends
+      await makeRequest(
         token,
         `https://api.github.com/repos/${fullRepoName}/issues?filter=all`,
-        data => dispatch(addIssues(data)),
+        addToIssues,
       );
+      const onlyRepoName = fullRepoName.split('/')[1];
+      const orderedIssues = orderIssuesFromSession(onlyRepoName, issues);
+      return dispatch(addIssues(orderedIssues));
     } catch (e) {
       const message = `Could not fetch issues for ${fullRepoName}`;
       handleError(message, e, dispatch);
