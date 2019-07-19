@@ -19,7 +19,7 @@
 }
 
 .RepoCard.disabled {
-  background-color: grey;
+  opacity: 0.25;
   cursor: not-allowed;
 }
 
