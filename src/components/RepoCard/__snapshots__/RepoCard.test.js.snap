@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should apply a selected class 1`] = `
+<div
+  className="RepoCard  selected"
+  onClick={[Function]}
+>
+  <div
+    className="RepoCard-title"
+  >
+    warryn
+  </div>
+  <div
+    className="RepoCard-issue-count"
+  >
+    1
+     open issues
+  </div>
+</div>
+`;
+
+exports[`should disable the card if the repo has no open issues 1`] = `
+<div
+  className="RepoCard disabled "
+  onClick={[Function]}
+>
+  <div
+    className="RepoCard-title"
+  >
+    warryn
+  </div>
+  <div
+    className="RepoCard-issue-count"
+  >
+    0
+     open issues
+  </div>
+</div>
+`;
+
+exports[`should enable the card if the repo has open issues 1`] = `
+<div
+  className="RepoCard  "
+  onClick={[Function]}
+>
+  <div
+    className="RepoCard-title"
+  >
+    warryn
+  </div>
+  <div
+    className="RepoCard-issue-count"
+  >
+    1
+     open issues
+  </div>
+</div>
+`;
+
+exports[`should not apply a selected class 1`] = `
+<div
+  className="RepoCard  "
+  onClick={[Function]}
+>
+  <div
+    className="RepoCard-title"
+  >
+    warryn
+  </div>
+  <div
+    className="RepoCard-issue-count"
+  >
+    1
+     open issues
+  </div>
+</div>
+`;
