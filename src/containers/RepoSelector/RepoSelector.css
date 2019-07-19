@@ -1,11 +1,23 @@
-.RepoSelector-column {
+.RepoSelector {
   margin-top: 5vh;
   display: flex;
   flex-direction: column;
+}
+
+.RepoSelector-column {
+  display: flex;
   align-items: center;
 }
 
 .RepoSelector-prompt {
   font-size: x-large;
   color: #f6f8ff;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .RepoSelector {
+    grid-area: bottom;
+    justify-content: flex-start;
+  }
 }

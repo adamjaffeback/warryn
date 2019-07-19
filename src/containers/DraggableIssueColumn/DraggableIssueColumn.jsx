@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import useWindowSize from '@rehooks/window-size';
 import './DraggableIssueColumn.css';
 import { connect } from 'react-redux';
 import { getIssuesForRepo } from '../../state/thunks/repoThunks';
@@ -25,6 +26,7 @@ const mapState = state => {
 
 function DraggableIssueColumn(props) {
   const {token, repoName, loading, issues, dispatch} = props;
+  const {innerWidth} = useWindowSize();
 
   useEffect(() => {
     if (token) {
@@ -33,6 +35,14 @@ function DraggableIssueColumn(props) {
       dispatch(getIssuesForRepo(token, repoName));
     }
   }, [dispatch, token, repoName])
+
+  function makeDirections() {
+    if (innerWidth < 768) {
+      return 'Long hold issue, then drag to reorder.';
+    } else {
+      return 'Drag issue to reorder.';
+    }
+  }
 
   function handleDragEnd(result) {
     const {source, destination} = result;
@@ -44,7 +54,7 @@ function DraggableIssueColumn(props) {
 
   return loading ? (<div>Loading...</div>) : (
     <div className='IssueColumn'>
-      <div className='IssueColumn-prompt'>Drag issues to reorder.</div>
+      <div className='IssueColumn-prompt'>{makeDirections()}</div>
 
       <DragDropContext onDragEnd={handleDragEnd}>
         <Droppable droppableId='issueColumn'>

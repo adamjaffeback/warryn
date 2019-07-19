@@ -9,4 +9,12 @@
 .IssueColumn-prompt {
   font-size: x-large;
   color: #f6f8ff;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .IssueColumn {
+    grid-area: center;
+    margin-top: 2vh;
+  }
 }

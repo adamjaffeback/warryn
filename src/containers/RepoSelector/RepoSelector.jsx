@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import useWindowSize from '@rehooks/window-size';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getReposForUser } from '../../state/thunks/repoThunks';
@@ -28,10 +29,31 @@ const mapState = state => {
 };
 
 function RepoSelector(props) {
+  const windowSize = useWindowSize();
   const {token, repos, loading, dispatch, history, repoSelected} = props;
 
-  let gridLocation = repoSelected ? {gridArea: 'left'} : {gridArea: 'center'};
+  function determineStyle () {
+    const {innerWidth} = windowSize;
 
+    // if no repo is selected
+    if (!repoSelected) {
+      // plop the selector right in the middle of the page as an easy-to-access column
+      return {gridArea: 'center', flexDirection: 'column'};
+    }
+
+    // repo selected, issues showing
+    if (innerWidth < 768) {
+      // small device, put the repo selector up top
+      // make it a row, and scroll
+      return {gridArea: 'top', flexDirection: 'row', overflowX: 'scroll'};
+    } else {
+      // large device
+      // keep formatting the same, just move it to the left side
+      return {gridArea: 'left', flexDirection: 'column'};
+    }
+  }
+
+  // on first render
   useEffect(() => {
     if (token) {
       dispatch(getReposForUser(token));
@@ -39,17 +61,25 @@ function RepoSelector(props) {
   }, [dispatch, token])
 
   if (token) {
-    return loading ? (<div style={gridLocation}>Loading...</div>) : (
-      <div style={gridLocation} className='RepoSelector-column'>
-        <div className="RepoSelector-prompt">Click a repo to view its issues:</div>
-        {repos.map(repo => {
-          return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
-        })}
-      </div>
-    );
+    if (loading) {
+      return (<div style={determineStyle()}>Loading...</div>);
+    } else {
+      return (
+        <div className='RepoSelector' style={{gridArea: determineStyle().gridArea}}>
+          <div className="RepoSelector-prompt">Click a repo to view its issues:</div>
+          <div style={determineStyle()} className='RepoSelector-column'>
+            {repos.map(repo => {
+              return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
+            })}
+          </div>
+        </div>
+      );
+    }
+  // no token, send user back to auth
   } else {
     history.push('/auth');
-    return <span></span>
+    // must return html
+    return (<span></span>);
   }
 }
 
