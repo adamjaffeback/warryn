@@ -87,6 +87,26 @@ The Warryn SVG and favicon are totally open source.
 
 > "You do not have to finish the challenge, but your project must work."
 
+### API/Database Persistence
+
+Table with three columns: `owner_id`, `full_repo_name`, and `issue_order`.
+
+#### GET `https://someurl.com/user/:userId/repo`
+
+When a user logs in, use their GitHub user ID to get all of the repos they've ordered from the database via the matching `owner_id`
+
+On the frontend use the `full_repo_name` to match with the selected repo `issue_order` is a PostgreSQL array of issue IDs which could be used to reorder the issues again.
+
+#### POST `https://someurl.com/user/:userId/repo`
+
+If the user has never reordered this repo, start documenting the resource.
+
+#### PATCH `https://someurl.com/user/:userId/repo/:fullRepoName`
+
+When a user reorders an item, in addition to updating sessionStorage, replace the `issue_order` with the new ordered list.
+
+### Other Tasks
+
 In no particular order:
 
 1. Validate GitHub token.
