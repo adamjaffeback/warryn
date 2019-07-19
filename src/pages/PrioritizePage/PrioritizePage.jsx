@@ -18,7 +18,7 @@ function PrioritizePage({repoSelected}) {
   return (
     <div className='PrioritizePage'>
       <RepoSelector />
-      {repoSelected ? <DraggableIssueColumn class='PrioritizePage-column' /> : ''}
+      {repoSelected ? <DraggableIssueColumn /> : ''}
     </div>
   );
 }

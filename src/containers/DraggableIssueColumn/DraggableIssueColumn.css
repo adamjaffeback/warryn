@@ -1,11 +1,12 @@
-.RepoSelector-column {
+.IssueColumn {
   margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-area: right;
 }
 
-.RepoSelector-prompt {
+.IssueColumn-prompt {
   font-size: x-large;
   color: #f6f8ff;
 }

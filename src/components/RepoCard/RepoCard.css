@@ -1,15 +1,19 @@
 .RepoCard {
-  background-color: #f2f2f2;
+  background-color: #f6f8ff;
   border-radius: 2px;
   margin: 1rem;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  width: 30vw;
-  height: 10vh;
+  min-width: 30vw;
+  min-height: 10vh;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   cursor: pointer;
+}
+
+.RepoCard:hover {
+  opacity: 0.6;
 }
 
 .RepoCard.disabled {

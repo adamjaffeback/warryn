@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './DraggableIssueColumn.css';
 import { connect } from 'react-redux';
 import { getIssuesForRepo } from '../../state/thunks/repoThunks';
 import { clearIssues, moveIssue } from '../../state/actions/issuesActions';
@@ -42,18 +43,22 @@ function DraggableIssueColumn(props) {
   }
 
   return loading ? (<div>Loading...</div>) : (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId='issueColumn'>
-        {provided => (
-          <div {...provided.droppabedProps} ref={provided.innerRef}>
-            {issues.map((issue, index) => {
-              return (<IssueCard key={issue.id} issue={issue} index={index} />);
-            })}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className='IssueColumn'>
+      <div className='IssueColumn-prompt'>Drag issues to reorder.</div>
+
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId='issueColumn'>
+          {provided => (
+            <div {...provided.droppabedProps} ref={provided.innerRef}>
+              {issues.map((issue, index) => {
+                return (<IssueCard key={issue.id} issue={issue} index={index} />);
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
 }
 
