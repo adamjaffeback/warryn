@@ -5,13 +5,7 @@ import RepoSelector from '../../containers/RepoSelector/RepoSelector';
 import DraggableIssueColumn from '../../containers/DraggableIssueColumn/DraggableIssueColumn';
 
 const mapState = state => ({
-  repoSelected: state.repos.reduce((acc, repo) => {
-    if (repo.selected) {
-      return true;
-    }
-
-    return acc;
-  }, false),
+  repoSelected: state.repos.find(repo => repo.selected),
 });
 
 function PrioritizePage({repoSelected}) {

@@ -9,7 +9,7 @@ function AuthPage() {
   return (
     <div className='AuthPage'>
       <GithubKeyForm />
-      <Warryn message={prompt}/>
+      <Warryn message={prompt} />
     </div>
   );
 }
