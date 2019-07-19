@@ -29,12 +29,10 @@ const mapState = state => {
 };
 
 function RepoSelector(props) {
-  const windowSize = useWindowSize();
+  const {innerWidth} = useWindowSize();
   const {token, repos, loading, dispatch, history, repoSelected} = props;
 
-  function determineStyle () {
-    const {innerWidth} = windowSize;
-
+  function determineStyle() {
     // if no repo is selected
     if (!repoSelected) {
       // plop the selector right in the middle of the page as an easy-to-access column
@@ -69,7 +67,12 @@ function RepoSelector(props) {
           <div className="RepoSelector-prompt">Click a repo to view its issues:</div>
           <div style={determineStyle()} className='RepoSelector-column'>
             {repos.map(repo => {
-              return (<RepoCard key={repo.id} clickCard={() => dispatch(selectRepo(repo.id))} repo={repo} />);
+              return (
+                <RepoCard
+                  key={repo.id}
+                  clickCard={() => dispatch(selectRepo(repo.id))}
+                  repo={repo} />
+              );
             })}
           </div>
         </div>
