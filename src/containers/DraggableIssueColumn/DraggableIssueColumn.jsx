@@ -12,13 +12,7 @@ const mapState = state => {
 
   return {
     token: user,
-    repoName: repos.reduce((acc, repo) => {
-      if (repo.selected) {
-        return repo.full_name;
-      }
-
-      return acc;
-    }, ''),
+    repoName: repos.find(repo => repo.selected).full_name,
     loading: ui.issuesLoading,
     issues: issues,
   };
@@ -52,24 +46,29 @@ function DraggableIssueColumn(props) {
     }
   }
 
-  return loading ? (<div>Loading...</div>) : (
-    <div className='IssueColumn'>
-      <div className='IssueColumn-prompt'>{makeDirections()}</div>
+  if (loading) {
+    return (<div>Loading...</div>);
+  } else {
+    return (
+      <div className='IssueColumn'>
+        <div className='IssueColumn-prompt'>{makeDirections()}</div>
 
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId='issueColumn'>
-          {provided => (
-            <div {...provided.droppabedProps} ref={provided.innerRef}>
-              {issues.map((issue, index) => {
-                return (<IssueCard key={issue.id} issue={issue} index={index} />);
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </div>
-  );
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId='issueColumn'>
+            {provided => (
+              <div {...provided.droppabedProps} ref={provided.innerRef}>
+                {issues.map((issue, index) => {
+                  return (<IssueCard key={issue.id} issue={issue} index={index} />);
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+
+      </div>
+    );
+  }
 }
 
 export default connect(mapState, null)(DraggableIssueColumn);
