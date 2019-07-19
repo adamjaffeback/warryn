@@ -17,7 +17,7 @@ const mapState = state => {
 
       return acc;
     }, ''),
-    loading: ui.isLoading,
+    loading: ui.issuesLoading,
     issues: issues,
   };
 };

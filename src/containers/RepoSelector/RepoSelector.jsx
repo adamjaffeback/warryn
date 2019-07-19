@@ -22,7 +22,7 @@ const mapState = state => {
   return {
     token: user,
     repos: [...hasIssues, ...noIssues],
-    loading: ui.isLoading,
+    loading: ui.reposLoading,
     repoSelected: repos.find(repo => repo.selected),
   };
 };

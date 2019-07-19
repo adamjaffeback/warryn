@@ -1,4 +1,7 @@
-export const isLoading = loading => ({type: 'IS_LOADING', payload: loading});
+export const isLoading = loadingDescription => ({
+  type: 'IS_LOADING',
+  payload: loadingDescription,
+});
 
 export const logError = error => ({type: 'LOG_ERROR', payload: error});
 

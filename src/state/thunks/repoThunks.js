@@ -51,7 +51,7 @@ function handleError (message, error, dispatch) {
 
 export function getReposForUser (token) {
   return async dispatch => {
-    dispatch(isLoading(true));
+    dispatch(isLoading({key: 'reposLoading', status: true}));
 
     try {
       return await makeRequest(
@@ -63,7 +63,7 @@ export function getReposForUser (token) {
       const message = 'Could not fetch repos for user';
       handleError(message, e, dispatch);
     } finally {
-      dispatch(isLoading(false));
+      dispatch(isLoading({key: 'reposLoading', status: false}));
     }
   }
 }
@@ -104,7 +104,7 @@ function orderIssuesFromSession (repoName, issues) {
 
 export function getIssuesForRepo (token, fullRepoName) {
   return async dispatch => {
-    dispatch(isLoading(true));
+    dispatch(isLoading({key: 'issuesLoading', status: true}));
 
     try {
       const issues = [];
@@ -123,7 +123,7 @@ export function getIssuesForRepo (token, fullRepoName) {
       const message = `Could not fetch issues for ${fullRepoName}`;
       handleError(message, e, dispatch);
     } finally {
-      dispatch(isLoading(false));
+      dispatch(isLoading({key: 'issuesLoading', status: false}))
     }
   }
 }
