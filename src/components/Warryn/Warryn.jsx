@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import robot from './robot.svg';
 import './Warryn.css';
 
@@ -10,5 +11,9 @@ function Warryn ({message}) {
     </div>
   );
 }
+
+Warryn.propTypes = {
+  message: PropTypes.string,
+};
 
 export default Warryn;

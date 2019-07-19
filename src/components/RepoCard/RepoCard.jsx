@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './RepoCard.css';
 
 function RepoCard({repo, clickCard}) {
@@ -19,5 +20,10 @@ function RepoCard({repo, clickCard}) {
     </div>
   );
 }
+
+RepoCard.propTypes = {
+  repo: PropTypes.object.isRequired,
+  clickCard: PropTypes.func.isRequired,
+};
 
 export default RepoCard;

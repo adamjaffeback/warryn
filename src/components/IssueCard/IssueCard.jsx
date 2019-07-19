@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './IssueCard.css';
 import { Draggable } from 'react-beautiful-dnd';
 import moment from 'moment';
@@ -10,6 +11,10 @@ function Avatar({srcUrl}) {
     </React.Fragment>
   );
 }
+
+Avatar.propTypes = {
+  srcUrl: PropTypes.string.isRequired,
+};
 
 function CardContents ({issue, provided}) {
   const {assignee} = issue;
@@ -35,6 +40,11 @@ function CardContents ({issue, provided}) {
   );
 }
 
+CardContents.propTypes = {
+  issue: PropTypes.object.isRequired,
+  provided: PropTypes.object.isRequired,
+};
+
 function IssueCard({issue, index}) {
   return (
     <Draggable draggableId={issue.id} index={index}>
@@ -44,5 +54,10 @@ function IssueCard({issue, index}) {
     </Draggable>
   );
 }
+
+IssueCard.propTypes = {
+  issue: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default IssueCard;

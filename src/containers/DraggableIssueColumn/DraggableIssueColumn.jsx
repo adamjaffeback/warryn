@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import useWindowSize from '@rehooks/window-size';
 import './DraggableIssueColumn.css';
 import { connect } from 'react-redux';
@@ -70,5 +71,19 @@ function DraggableIssueColumn(props) {
     );
   }
 }
+
+DraggableIssueColumn.propTypes = {
+  token: PropTypes.string.isRequired,
+  repoName: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  issues: PropTypes.arrayOf(PropTypes.object),
+  dispatch: PropTypes.func.isRequired,
+};
+
+DraggableIssueColumn.defaultProps = {
+  token: false,
+  loading: false,
+  issues: [],
+};
 
 export default connect(mapState, null)(DraggableIssueColumn);

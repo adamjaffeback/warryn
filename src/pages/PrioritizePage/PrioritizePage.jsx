@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './PrioritizePage.css';
 import RepoSelector from '../../containers/RepoSelector/RepoSelector';
@@ -16,5 +17,13 @@ function PrioritizePage({repoSelected}) {
     </div>
   );
 }
+
+PrioritizePage.propTypes = {
+  repoSelected: PropTypes.object,
+};
+
+PrioritizePage.defaultProps = {
+  repoSelected: null,
+};
 
 export default connect(mapState, null)(PrioritizePage);

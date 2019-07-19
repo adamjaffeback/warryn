@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './GithubKeyForm.css';
@@ -28,5 +29,12 @@ function GithubKeyForm({setToken, history}) {
     </form>
   );
 }
+
+GithubKeyForm.propTypes = {
+  setToken: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+};
 
 export default connect(null, {setToken})(withRouter(GithubKeyForm));

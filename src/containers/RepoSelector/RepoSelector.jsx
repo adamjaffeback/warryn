@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import useWindowSize from '@rehooks/window-size';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -85,5 +86,23 @@ function RepoSelector(props) {
     return (<span></span>);
   }
 }
+
+RepoSelector.propTypes = {
+  token: PropTypes.string,
+  repos: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
+  repoSelected: PropTypes.object,
+};
+
+RepoSelector.defaultProps = {
+  token: false,
+  repos: [],
+  loading: false,
+  repoSelected: null,
+};
 
 export default connect(mapState, null)(withRouter(RepoSelector));
