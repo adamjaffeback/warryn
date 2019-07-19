@@ -18,3 +18,16 @@
   padding: 1em;
   font-family: monospace;
 }
+
+@media (max-width: 768px) {
+  .Warryn {
+    min-height: 50vh;
+    grid-column: left / right;
+    grid-row: top / middle-row;
+    justify-content: center;
+  }
+
+  .Warryn > img {
+    height: 20vh;
+  }
+}

@@ -8,6 +8,15 @@
   grid-row: top / bottom;
 }
 
+@media (max-width: 768px) {
+  .GHForm {
+    min-height: 50vh;
+    grid-column: left / right;
+    grid-row: middle-row / bottom;
+    justify-content: flex-start;
+  }
+}
+
 label[for=apiKey] {
   font-size: x-large;
   font-family: Arial Rounded MT Bold;
@@ -37,4 +46,22 @@ input[name=apiKey] {
 
 #submitApiKey:disabled {
   opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .GHForm {
+    min-height: 50vh;
+    grid-column: left / right;
+    grid-row: middle-row / bottom;
+    justify-content: flex-start;
+  }
+
+  input[name=apiKey] {
+    border: 1px black solid;
+    width: 90vw;
+  }
+
+  #submitApiKey {
+    width: 90vw;
+  }
 }
