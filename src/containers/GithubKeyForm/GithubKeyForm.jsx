@@ -21,7 +21,7 @@ function GithubKeyForm({setToken, history}) {
   return (
     <form onSubmit={handleSubmit} className='GHForm'>
       <label htmlFor='apiKey'>
-        Enter GitHub API Key:
+        GitHub API Key:
         <input autoFocus={true} type='text' value={key} name='apiKey' onChange={handleChange} />
       </label>  
       <input type='submit' value='Submit' id='submitApiKey' disabled={key === ''} />
